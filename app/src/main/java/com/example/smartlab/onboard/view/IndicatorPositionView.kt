@@ -13,14 +13,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun IndicatorPositionView(
+internal fun IndicatorPositionView(
     count: Int,
     current: Int,
-    offsetY: Dp,
 ) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.offset(x = 0.dp, y = offsetY)
     ){
         for (item in 0 until count){
             val animationAlpha by animateFloatAsState(

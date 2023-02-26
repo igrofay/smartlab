@@ -17,7 +17,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun SmartlabTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+internal fun SmartlabTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = LightColorPalette
 
 

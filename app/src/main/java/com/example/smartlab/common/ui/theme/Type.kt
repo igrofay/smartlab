@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.smartlab.R
 
-val sfProDisplayFontFamily = FontFamily(
+internal val sfProDisplayFontFamily = FontFamily(
     Font(R.font.sf_pro_display_thin, FontWeight.Thin), // 100
     Font(R.font.sf_pro_display_ultra_light, FontWeight.ExtraLight), // 200
     Font(R.font.sf_pro_display_light, FontWeight.Light), // 300
@@ -21,7 +21,7 @@ val sfProDisplayFontFamily = FontFamily(
 )
 
 // Set of Material typography styles to start with
-val Typography = Typography(
+internal val Typography = Typography(
     defaultFontFamily = sfProDisplayFontFamily,
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
