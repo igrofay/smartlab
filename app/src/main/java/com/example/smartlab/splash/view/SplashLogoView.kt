@@ -9,11 +9,11 @@ import androidx.compose.ui.res.painterResource
 import com.example.smartlab.R
 
 @Composable
-fun SplashLogoView() {
+internal fun SplashLogoView() {
     Image(
         painter = painterResource(R.drawable.im_screensaver),
         contentDescription = null,
         modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.FillHeight
+        contentScale = ContentScale.Crop
     )
 }

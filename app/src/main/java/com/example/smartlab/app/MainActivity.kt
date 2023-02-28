@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.smartlab.common.ui.theme.SmartlabTheme
+import com.example.smartlab.nav.view.AppNav
 import com.example.smartlab.onboard.view.OnboardScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,9 +23,7 @@ internal class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    OnboardScreen(
-                        goToAuthentication = {}
-                    )
+                    AppNav()
                 }
             }
         }

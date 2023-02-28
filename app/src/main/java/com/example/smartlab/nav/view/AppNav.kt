@@ -6,9 +6,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.smartlab.nav.model.StartRouting
 
 @Composable
-fun AppNav() {
+internal fun AppNav() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = StartRouting.route){
-
+        startNavigation(navController)
     }
 }

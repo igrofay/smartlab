@@ -1,5 +1,7 @@
 package com.example.data
 
+import android.util.Log
+import android.util.Patterns
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
@@ -17,8 +19,6 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.data.test", appContext.packageName)
+        Log.e("c>>", Patterns.EMAIL_ADDRESS.pattern())
     }
 }

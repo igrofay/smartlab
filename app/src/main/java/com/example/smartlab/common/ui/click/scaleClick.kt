@@ -1,7 +1,6 @@
 package com.example.smartlab.common.ui.click
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
@@ -10,38 +9,41 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.input.pointer.pointerInput
 
-private enum class AlphaButtonState {
+private enum class ScaleButtonState {
     Pressed, Idl
 }
 
-internal fun Modifier.alphaClick(
-    onClick: () -> Unit
+internal fun Modifier.scaleClick(
+    onClick: (() -> Unit)?
 ) = composed {
     var state by remember {
-        mutableStateOf(AlphaButtonState.Idl)
+        mutableStateOf(ScaleButtonState.Idl)
     }
     val animation by animateFloatAsState(
-        targetValue = if (state == AlphaButtonState.Pressed) 0.75f else 1f
+        targetValue = if (state == ScaleButtonState.Pressed && onClick != null)
+            0.75f
+        else 1f
     )
     this
-        .alpha(animation)
+        .scale(animation)
         .clickable(
             interactionSource = remember { MutableInteractionSource() },
             indication = null,
-            onClick = onClick,
+            onClick = onClick ?: {},
         )
         .pointerInput(state) {
             awaitPointerEventScope {
                 state = when(state){
-                    AlphaButtonState.Pressed -> {
+                    ScaleButtonState.Pressed -> {
                         waitForUpOrCancellation()
-                        AlphaButtonState.Idl
+                        ScaleButtonState.Idl
                     }
-                    AlphaButtonState.Idl -> {
+                    ScaleButtonState.Idl -> {
                         awaitFirstDown(false)
-                        AlphaButtonState.Pressed
+                        ScaleButtonState.Pressed
                     }
                 }
             }

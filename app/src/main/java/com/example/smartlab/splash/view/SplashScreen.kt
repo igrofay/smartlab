@@ -7,32 +7,30 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.smartlab.splash.model.SplashState
+import com.example.data.domain.model.app.AppState
 import com.example.smartlab.splash.view_model.SplashVM
 
 @Composable
-fun SplashScreen(
+internal fun SplashScreen(
     goToOnboard : ()-> Unit,
     goToAuthentication: ()->Unit,
     goToMainContent: ()-> Unit,
+    goToCodeEntry: ()->Unit,
     viewModel : SplashVM = hiltViewModel(),
 ) {
-    val activity = LocalContext.current as? ComponentActivity
-    SideEffect {
-        activity?.window?.setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS)
-    }
-    when(viewModel.state.value){
-        SplashState.Authorization -> LaunchedEffect(Unit){
-            goToMainContent()
+//    val activity = LocalContext.current as? ComponentActivity
+//    SideEffect {
+//        activity?.window?.setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS)
+//    }
+    LaunchedEffect(viewModel.state.value){
+        when(viewModel.state.value){
+            AppState.FirsTime -> goToOnboard()
+            AppState.AuthenticationEmail -> goToAuthentication()
+            AppState.AuthenticationCode -> goToCodeEntry()
+            AppState.Authorization -> goToMainContent()
+            null -> {}
         }
-        SplashState.FirstTime -> LaunchedEffect(Unit){
-            goToOnboard()
-        }
-        SplashState.Identification -> SplashLogoView()
-        SplashState.NeedAuthentication -> LaunchedEffect(Unit){
-            goToAuthentication()
-        }
-    }
 
-
+    }
+    SplashLogoView()
 }

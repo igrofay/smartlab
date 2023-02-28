@@ -43,9 +43,19 @@ internal class OnboardTest {
         val appRepos =object : AppRepos{
             override val isUserFamiliarWithApp: Boolean
                 get() = false
-
             override fun userHasBeenIntroducedWithApp() {
 
+            }
+            override val token: String?
+                get() = null
+
+            override fun setToken(token: String) {
+            }
+            override val isCodeSetForEnterApp: Boolean
+                get() = false
+
+            override fun checkEnteredCode(code: String): Boolean {
+                return false
             }
         }
         viewModel = OnboardVM(appRepos)
@@ -72,7 +82,7 @@ internal class OnboardTest {
             if(i == assertTestData.size.dec()){
                 composeTestRule.onNodeWithTag("next")
                     .assert(hasText("Завершить"))
-                // Проверяем чно на последнем слайде кнопка имеен текст завершить
+                // Проверяем что на последнем слайде кнопка имеен текст завершить
             }
             composeTestRule.onNodeWithTag("next")
                 .performClick() // Нажимаем кнопку продолжить
