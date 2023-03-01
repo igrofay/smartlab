@@ -55,7 +55,7 @@ internal fun InputCodeFromEmailView(
         Spacer(modifier = Modifier.height(24.dp))
         DisplayCodeInput(
             value = state.code,
-            onValueChange = { eventBase.onEvent(AuthenticationEvent.InputCodeFromEmail(it)) },
+            onValueChange = { eventBase.onEvent(AuthenticationEvent.EnteringCodeFromEmail(it)) },
             count = state.sizeCode
         )
         Spacer(modifier = Modifier.height(17.dp))

@@ -1,8 +1,8 @@
 package com.example.smartlab.authentication.model
 
 internal sealed class AuthenticationEvent {
-    class InputEmail(val email:String): AuthenticationEvent()
-    class InputCodeFromEmail(val code: String):AuthenticationEvent()
+    class EnteringEmail(val email:String): AuthenticationEvent()
+    class EnteringCodeFromEmail(val code: String):AuthenticationEvent()
     object GetCodeFromEmail: AuthenticationEvent()
     object InputAnotherEmail: AuthenticationEvent()
 }

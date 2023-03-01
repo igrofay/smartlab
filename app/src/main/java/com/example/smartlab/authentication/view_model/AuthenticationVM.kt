@@ -21,7 +21,7 @@ internal class AuthenticationVM @Inject constructor(
     private val authenticationRepos: AuthenticationRepos,
     private val signInUseCase: SignInUseCase,
 ) : ViewModel(), EventBase<AuthenticationEvent> {
-    private val _state = mutableStateOf(AuthenticationState(isInputCodeFromEmail = true))
+    private val _state = mutableStateOf(AuthenticationState())
     val state: State<AuthenticationState> by ::_state
 
     private val _errorMessage = mutableStateOf<AppError?>(null)
@@ -36,7 +36,7 @@ internal class AuthenticationVM @Inject constructor(
                 job?.cancel()
                 _state.value = AuthenticationState()
             }
-            is AuthenticationEvent.InputCodeFromEmail -> {
+            is AuthenticationEvent.EnteringCodeFromEmail -> {
                 val localState = _state.value
                 if (
                     event.code.isEmpty() ||
@@ -48,7 +48,7 @@ internal class AuthenticationVM @Inject constructor(
                     signIn()
                 }
             }
-            is AuthenticationEvent.InputEmail -> {
+            is AuthenticationEvent.EnteringEmail -> {
                 _state.value = _state.value.copy(email = event.email)
             }
         }
