@@ -24,7 +24,7 @@ internal fun Modifier.scaleClick(
     }
     val animation by animateFloatAsState(
         targetValue = if (state == ScaleButtonState.Pressed && onClick != null)
-            0.75f
+            0.9f
         else 1f
     )
     this

@@ -2,6 +2,7 @@ package com.example.smartlab.common.ui.button
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.smartlab.common.ui.click.scaleClick
@@ -24,6 +26,8 @@ internal fun CustomButton(
     onClick: ()->Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    fontSize: TextUnit = 17.sp ,
+    contentPaddingValues: PaddingValues = PaddingValues(16.dp)
 ) {
     Box(
         modifier = modifier
@@ -39,13 +43,13 @@ internal fun CustomButton(
                     MaterialTheme.colors.onPrimary,
                 MaterialTheme.shapes.medium
             )
-            .padding(vertical = 16.dp),
+            .padding(contentPaddingValues),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = label,
             fontFamily = sfProDisplayFontFamily,
-            fontSize = 17.sp,
+            fontSize = fontSize,
             fontWeight = FontWeight.W600,
             color = Color.White
         )

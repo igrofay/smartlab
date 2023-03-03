@@ -1,6 +1,7 @@
 package com.example.data.data.repos
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.data.domain.repos.AppRepos
 import java.security.MessageDigest
 import javax.inject.Inject

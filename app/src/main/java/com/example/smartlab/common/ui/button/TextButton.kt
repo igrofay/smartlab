@@ -12,7 +12,7 @@ import com.example.smartlab.common.ui.theme.sfProDisplayFontFamily
 @Composable
 internal fun TextButton(
     label: String,
-    onClick: ()->Unit
+    onClick: ()->Unit,
 ) {
     Text(
         text = label,

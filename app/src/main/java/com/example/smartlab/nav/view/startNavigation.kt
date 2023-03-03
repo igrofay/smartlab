@@ -4,6 +4,7 @@ import androidx.navigation.*
 import androidx.navigation.compose.composable
 import com.example.smartlab.authentication.view.AuthenticationScreen
 import com.example.smartlab.code_entry.view.CodeEntryScreen
+import com.example.smartlab.nav.model.MainRouting
 import com.example.smartlab.nav.model.StartRouting
 import com.example.smartlab.onboard.view.OnboardScreen
 import com.example.smartlab.patient_record.view.PatientRecordScreen
@@ -16,7 +17,9 @@ internal fun NavGraphBuilder.startNavigation(navController: NavController) {
             SplashScreen(
                 goToOnboard = { navController.navigate(StartRouting.Onboard.route) },
                 goToAuthentication = { navController.navigate(StartRouting.Authentication.route) },
-                goToMainContent = { },
+                goToMainContent = {
+                    navController.navigate(MainRouting.route)
+                },
                 goToCodeEntry = {
                     navController.navigate(
                         StartRouting.CodeEntry.allRoute(
@@ -57,15 +60,20 @@ internal fun NavGraphBuilder.startNavigation(navController: NavController) {
                     )
                 },
                 goToOpenMainContent = {
-
+                    navController.navigate(MainRouting.route)
                 }
             )
         }
         composable(
-            StartRouting.CreatingPatientRecord.allRoute()
+            StartRouting.CreatingPatientRecord.allRoute(),
+            arguments = listOf(
+                navArgument(
+                    StartRouting.CreatingPatientRecord.arg1
+                ) { type = NavType.BoolType }
+            ),
         ) {
             PatientRecordScreen(
-                goToMainContent = {}
+                goToMainContent = { navController.navigate(MainRouting.route)}
             )
         }
     }

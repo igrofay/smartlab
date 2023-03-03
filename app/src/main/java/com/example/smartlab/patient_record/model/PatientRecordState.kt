@@ -31,28 +31,29 @@ internal sealed interface PatientRecordState : UserModel {
         val isEdit = (this as? ChangingPatientRecord)?.isEdit ?: true
         return isFirstname && isLastname &&  isMiddleName && isBirthday && isEdit
     }
-
-    fun toPatientRecordState(isCreatingPatientRecord: Boolean, userModel: UserModel) : PatientRecordState{
-        if (isCreatingPatientRecord){
-            return (this as CreatingPatientRecord).copy(
-                firstname = userModel.firstname,
-                lastname = userModel.lastname,
-                middleName = userModel.middleName,
-                birthday = userModel.birthday,
-                image = userModel.image,
-                gender = userModel.gender,
-                followingActions = CreatingPatientRecordFollowingActions.GoToMainContent
-            )
-        }else{
-            return (this as ChangingPatientRecord).copy(
-                firstname = userModel.firstname,
-                lastname = userModel.lastname,
-                middleName = userModel.middleName,
-                birthday = userModel.birthday,
-                image = userModel.image,
-                gender = userModel.gender,
-                isEdit = false,
-            )
+    companion object{
+        fun toPatientRecordState(isCreatingPatientRecord: Boolean, userModel: UserModel) : PatientRecordState{
+            if (isCreatingPatientRecord){
+                return CreatingPatientRecord(
+                    firstname = userModel.firstname,
+                    lastname = userModel.lastname,
+                    middleName = userModel.middleName,
+                    birthday = userModel.birthday,
+                    image = userModel.image,
+                    gender = userModel.gender,
+                    followingActions = CreatingPatientRecordFollowingActions.GoToMainContent
+                )
+            }else{
+                return ChangingPatientRecord(
+                    firstname = userModel.firstname,
+                    lastname = userModel.lastname,
+                    middleName = userModel.middleName,
+                    birthday = userModel.birthday,
+                    image = userModel.image,
+                    gender = userModel.gender,
+                    isEdit = false,
+                )
+            }
         }
     }
 }

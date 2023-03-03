@@ -13,3 +13,4 @@ internal val colorSecondaryVariant = Color(0xFF00B712)
 internal val Colors.colorDescription: Color
     get() = Color(0xFF939396)
 internal val lightGray = Color(0xFFEBEBEB)
+internal val colorItemBottomBar = Color(0xFFB8C1CC)

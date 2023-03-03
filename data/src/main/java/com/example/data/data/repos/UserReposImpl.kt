@@ -6,6 +6,7 @@ import com.example.data.data.model.UserBody
 import com.example.data.domain.model.user.UserModel
 import com.example.data.domain.repos.UserRepos
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
@@ -16,8 +17,7 @@ import javax.inject.Singleton
 @Singleton
 internal class UserReposImpl @Inject constructor(
     private val userDataStore: DataStore<UserBody?>,
-    @AuthorizedHttpClient
-    private val client: HttpClient,
+    @AuthorizedHttpClient private val client: HttpClient,
 ): UserRepos {
     override fun getUserModel(): Flow<UserModel?> {
         return userDataStore.data
@@ -25,10 +25,10 @@ internal class UserReposImpl @Inject constructor(
 
     override suspend fun updateUserModel(userModel: UserModel) {
         val userBody = UserBody.fromUserModelToUserBody(userModel)
-        client.post("/api/createProfile"){
+        val body = client.post("/api/createProfile"){
             setBody(userBody)
             contentType(ContentType.Application.Json)
-        }
-        userDataStore.updateData { userBody }
+        }.body<UserBody>()
+        userDataStore.updateData { body }
     }
 }
