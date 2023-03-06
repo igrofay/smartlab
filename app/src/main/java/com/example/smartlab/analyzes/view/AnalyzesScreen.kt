@@ -18,6 +18,6 @@ internal fun AnalyzesScreen(
         AnalyzesState.Load -> Box(Modifier.fillMaxSize(), Alignment.Center){
             CircularProgressIndicator()
         }
-        is AnalyzesState.Success -> ContentView(state)
+        is AnalyzesState.Success -> ContentView(state, viewModel)
     }
 }

@@ -1,6 +1,9 @@
 package com.example.smartlab.nav.view
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,5 +18,11 @@ internal fun AppNav() {
         composable(MainRouting.route){
             MainNavigation(navController)
         }
+    }
+}
+internal fun NavController.navNoReturn(route: String){
+    val lastRoute = currentBackStackEntry?.destination?.route ?: return
+    navigate(route){
+        popUpTo(lastRoute){ inclusive = true }
     }
 }

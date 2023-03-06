@@ -1,13 +1,11 @@
 package com.example.data.data.di
 
+import com.example.data.data.repos.*
 import com.example.data.data.repos.AppReposImpl
 import com.example.data.data.repos.AuthenticationReposImpl
 import com.example.data.data.repos.CatalogReposImpl
 import com.example.data.data.repos.UserReposImpl
-import com.example.data.domain.repos.AppRepos
-import com.example.data.domain.repos.AuthenticationRepos
-import com.example.data.domain.repos.CatalogRepos
-import com.example.data.domain.repos.UserRepos
+import com.example.data.domain.repos.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -27,4 +25,7 @@ abstract class ReposModule {
 
     @Binds
     internal abstract fun catalogRepos(catalogReposImpl: CatalogReposImpl) : CatalogRepos
+
+    @Binds
+    internal abstract fun cartRepos(cartReposImpl: CartReposImpl): CartRepos
 }

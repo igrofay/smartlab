@@ -1,6 +1,6 @@
 package com.example.smartlab.nav.model
 
-internal sealed class StartRouting(val route: String){
+internal sealed class StartRouting(route: String) : AppRouting(route) {
     object Splash : StartRouting("splash")
     object Onboard : StartRouting("onboard")
     object Authentication : StartRouting("authentication")

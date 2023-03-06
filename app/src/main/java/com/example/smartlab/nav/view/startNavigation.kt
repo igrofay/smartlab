@@ -15,13 +15,15 @@ internal fun NavGraphBuilder.startNavigation(navController: NavController) {
     navigation(StartRouting.Splash.route, StartRouting.route) {
         composable(StartRouting.Splash.route) {
             SplashScreen(
-                goToOnboard = { navController.navigate(StartRouting.Onboard.route) },
-                goToAuthentication = { navController.navigate(StartRouting.Authentication.route) },
+                goToOnboard = {
+                    navController.navNoReturn(StartRouting.Onboard.route)
+                },
+                goToAuthentication = { navController.navNoReturn(StartRouting.Authentication.route) },
                 goToMainContent = {
-                    navController.navigate(MainRouting.route)
+                    navController.navNoReturn(MainRouting.route)
                 },
                 goToCodeEntry = {
-                    navController.navigate(
+                    navController.navNoReturn(
                         StartRouting.CodeEntry.allRoute(
                             needCreateNewCode = false
                         )
@@ -30,15 +32,13 @@ internal fun NavGraphBuilder.startNavigation(navController: NavController) {
             )
         }
         composable(StartRouting.Onboard.route) {
-            OnboardScreen(goToAuthentication = { navController.navigate(StartRouting.Authentication.route) })
+            OnboardScreen(goToAuthentication = { navController.navNoReturn(StartRouting.Authentication.route) })
         }
         composable(StartRouting.Authentication.route) {
             AuthenticationScreen(
                 goToCodeEntry = {
-                    navController.navigate(
-                        StartRouting.CodeEntry.allRoute(
-                            needCreateNewCode = true
-                        )
+                    navController.navNoReturn(
+                        StartRouting.CodeEntry.allRoute(needCreateNewCode = true)
                     )
                 }
             )
@@ -53,14 +53,14 @@ internal fun NavGraphBuilder.startNavigation(navController: NavController) {
         ) {
             CodeEntryScreen(
                 goToCreatePatientChart = {
-                    navController.navigate(
+                    navController.navNoReturn(
                         StartRouting.CreatingPatientRecord.allRoute(
                             needCreatePatientRecord = true
                         )
                     )
                 },
                 goToOpenMainContent = {
-                    navController.navigate(MainRouting.route)
+                    navController.navNoReturn(MainRouting.route)
                 }
             )
         }
@@ -73,7 +73,7 @@ internal fun NavGraphBuilder.startNavigation(navController: NavController) {
             ),
         ) {
             PatientRecordScreen(
-                goToMainContent = { navController.navigate(MainRouting.route)}
+                goToMainContent = { navController.navNoReturn(MainRouting.route)}
             )
         }
     }

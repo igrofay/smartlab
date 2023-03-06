@@ -14,17 +14,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.domain.model.catalog.CatalogEntryModel
+import com.example.smartlab.common.ui.button.BorderButton
 import com.example.smartlab.common.ui.button.CustomButton
+import com.example.smartlab.common.ui.click.alphaClick
+import com.example.smartlab.common.ui.click.scaleClick
 import com.example.smartlab.common.ui.theme.colorDescription
 import com.example.smartlab.common.ui.theme.lightGray
 import com.example.smartlab.common.ui.theme.sfProDisplayFontFamily
 
 @Composable
 fun CardCatalogEntryView(
-    catalogEntryModel: CatalogEntryModel
+    catalogEntryModel: CatalogEntryModel,
+    added: Boolean,
+    buttonClick: ()-> Unit,
+    onClick:()->Unit,
 ) {
     Column(
         modifier = Modifier
+            .scaleClick(onClick)
             .fillMaxWidth()
             .shadow(8.dp, MaterialTheme.shapes.medium)
             .background(Color.White, MaterialTheme.shapes.medium)
@@ -63,14 +70,25 @@ fun CardCatalogEntryView(
                     color = Color.Black
                 )
             }
-            CustomButton(
-                label = "Добавить",
-                onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .width(96.dp),
-                fontSize = 14.sp,
-                contentPaddingValues = PaddingValues(vertical = 10.dp)
-            )
+            if(added){
+                BorderButton(
+                    label = "Убрать",
+                    onClick = buttonClick,
+                    modifier = Modifier
+                        .width(96.dp),
+                    fontSize = 14.sp,
+                    contentPaddingValues = PaddingValues(vertical = 10.dp)
+                )
+            }else{
+                CustomButton(
+                    label = "Добавить",
+                    onClick = buttonClick,
+                    modifier = Modifier
+                        .width(96.dp),
+                    fontSize = 14.sp,
+                    contentPaddingValues = PaddingValues(vertical = 10.dp)
+                )
+            }
         }
     }
 }

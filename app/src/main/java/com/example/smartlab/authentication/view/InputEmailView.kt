@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,6 +20,7 @@ import com.example.smartlab.common.ui.button.BorderButton
 import com.example.smartlab.common.ui.button.CustomButton
 import com.example.smartlab.common.ui.edit_text.CustomTextField
 import com.example.smartlab.common.ui.theme.colorDescription
+import com.example.smartlab.common.ui.theme.lightGray
 import com.example.smartlab.common.ui.theme.sfProDisplayFontFamily
 import com.example.smartlab.common.view_model.EventBase
 
@@ -85,6 +87,8 @@ internal fun InputEmailView(
         BorderButton(
             label = "Войти с Яндекс",
             onClick = { /*TODO*/ },
+            colorText = Color.Black,
+            borderColor = lightGray,
         )
         Spacer(modifier = Modifier.weight(0.2f))
     }

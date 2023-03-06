@@ -4,10 +4,10 @@ import androidx.annotation.DrawableRes
 import com.example.smartlab.R
 
 internal sealed class MainRouting(
-    val route: String,
+    route: String,
     val label: String,
     @DrawableRes val icon: Int
-) {
+) : AppRouting(route){
     object Analyzing: MainRouting("analyzing", "Анализы", R.drawable.ic_analyzing)
     object Results: MainRouting("results", "Результаты", R.drawable.ic_results)
     object Support: MainRouting("support", "Поддержка", R.drawable.ic_support)

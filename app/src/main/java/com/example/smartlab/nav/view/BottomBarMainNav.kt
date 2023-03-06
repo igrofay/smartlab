@@ -2,6 +2,7 @@ package com.example.smartlab.nav.view
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
@@ -36,6 +37,7 @@ internal fun BottomBarMainNav(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(Color.White)
                 .padding(horizontal = 7.dp, vertical = 12.dp),
             horizontalArrangement = Arrangement.SpaceAround,
         ) {

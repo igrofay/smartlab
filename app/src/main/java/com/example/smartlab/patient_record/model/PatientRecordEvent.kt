@@ -11,4 +11,5 @@ internal sealed class PatientRecordEvent {
     class EnteringBirthday(val birthday: LocalDate): PatientRecordEvent()
     class SelectedImage(val pathImage:String): PatientRecordEvent()
     class SelectedGender(val gender:String): PatientRecordEvent()
+    object Send: PatientRecordEvent()
 }

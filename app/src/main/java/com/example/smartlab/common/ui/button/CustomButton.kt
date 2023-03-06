@@ -27,7 +27,7 @@ internal fun CustomButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     fontSize: TextUnit = 17.sp ,
-    contentPaddingValues: PaddingValues = PaddingValues(16.dp)
+    contentPaddingValues: PaddingValues = PaddingValues(vertical = 16.dp)
 ) {
     Box(
         modifier = modifier

@@ -7,6 +7,7 @@ import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.domain.model.error.AppError
 import com.example.data.domain.repos.UserRepos
 import com.example.smartlab.common.view_model.EventBase
 import com.example.smartlab.nav.model.StartRouting
@@ -25,7 +26,7 @@ internal class PatientRecordVM @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(), EventBase<PatientRecordEvent> {
     private val isCreatingPatientRecord: Boolean = savedStateHandle
-        .get<Boolean>(StartRouting.CreatingPatientRecord.arg1) == null
+        .get<Boolean>(StartRouting.CreatingPatientRecord.arg1) == true
     private val _state = mutableStateOf(
         if (isCreatingPatientRecord) PatientRecordState.CreatingPatientRecord()
         else PatientRecordState.ChangingPatientRecord()
@@ -39,6 +40,8 @@ internal class PatientRecordVM @Inject constructor(
         }
     }
     private var job: Job? = null
+    private val _errorMessage = mutableStateOf<AppError?>(null)
+    val errorMessage: State<AppError?> by::_errorMessage
 
 
     override fun onCleared() {
@@ -147,7 +150,7 @@ internal class PatientRecordVM @Inject constructor(
                     }
                 }
             }
-
+            PatientRecordEvent.Send -> _errorMessage.value = null
         }
     }
 
@@ -156,6 +159,7 @@ internal class PatientRecordVM @Inject constructor(
         job = viewModelScope.launch {
             try {
                 userRepos.updateUserModel(userModel = _state.value)
+                _errorMessage.value = AppError.SimpleMessage("Сохранено")
             }catch (e:Throwable){
                 onError(e)
             }
