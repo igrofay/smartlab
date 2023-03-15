@@ -44,6 +44,7 @@ import kotlinx.coroutines.launch
 internal fun ContentView(
     state: AnalyzesState.Success,
     eventBase: EventBase<AnalyzesEvent>,
+    goToCart: ()-> Unit,
 ) {
     val confirmValueChange: (ModalBottomSheetValue) -> Boolean = remember {
         { modalBottomSheetValue ->
@@ -233,7 +234,7 @@ internal fun ContentView(
                     Row(
                         modifier = Modifier
                             .padding(horizontal = 20.dp, vertical = 24.dp)
-                            .scaleClick { }
+                            .scaleClick(goToCart)
                             .background(
                                 MaterialTheme.colors.primary,
                                 MaterialTheme.shapes.medium

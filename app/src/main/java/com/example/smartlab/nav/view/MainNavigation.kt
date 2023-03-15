@@ -25,6 +25,7 @@ import com.example.smartlab.R
 import com.example.smartlab.analyzes.view.AnalyzesScreen
 import com.example.smartlab.nav.model.BottomBarState
 import com.example.smartlab.nav.model.MainRouting
+import com.example.smartlab.nav.model.PurchaseRouting
 import com.example.smartlab.patient_record.view.PatientRecordScreen
 
 @Composable
@@ -44,7 +45,11 @@ internal fun MainNavigation(navController: NavController) {
                 modifier = Modifier.padding(paddingContent)
             ){
                 composable(MainRouting.Analyzing.route){
-                    AnalyzesScreen()
+                    AnalyzesScreen(
+                        goToCart = {
+                            navController.navigate(PurchaseRouting.route)
+                        }
+                    )
                 }
                 composable(MainRouting.Results.route){
                     Box(modifier = Modifier.fillMaxSize(), Alignment.Center){

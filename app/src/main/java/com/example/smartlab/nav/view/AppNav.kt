@@ -18,6 +18,7 @@ internal fun AppNav() {
         composable(MainRouting.route){
             MainNavigation(navController)
         }
+        purchaseNavigation(navController)
     }
 }
 internal fun NavController.navNoReturn(route: String){

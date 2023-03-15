@@ -13,11 +13,11 @@ import javax.inject.Singleton
 internal class CartReposImpl @Inject constructor(
     private val dataStore: DataStore<List<Ratio<CatalogEntryBody>>>
 ): CartRepos {
-    override fun getCart(): Flow<List<Ratio<CatalogEntryModel>>> {
+    override fun getCartCatalog(): Flow<List<Ratio<CatalogEntryModel>>> {
         return dataStore.data as Flow<List<Ratio<CatalogEntryModel>>>
     }
 
-    override suspend fun add(ratio: Ratio<CatalogEntryModel>) {
+    override suspend fun addCatalogEntry(ratio: Ratio<CatalogEntryModel>) {
         val asRatio: Ratio<CatalogEntryBody> = ratio as? Ratio<CatalogEntryBody> ?: return
         dataStore.updateData {list->
             list.toMutableList().apply {
@@ -26,7 +26,7 @@ internal class CartReposImpl @Inject constructor(
         }
     }
 
-    override suspend fun update(ratio: Ratio<CatalogEntryModel>) {
+    override suspend fun updateCatalogEntry(ratio: Ratio<CatalogEntryModel>) {
         dataStore.updateData {list->
             val index = list.indexOfFirst { it.product.id == ratio.product.id }
             list.toMutableList().apply {
@@ -35,7 +35,7 @@ internal class CartReposImpl @Inject constructor(
         }
     }
 
-    override suspend fun remove(entryModel: CatalogEntryModel) {
+    override suspend fun removeCatalogEntry(entryModel: CatalogEntryModel) {
         dataStore.updateData {list->
             val index = list.indexOfFirst { it.product.id == entryModel.id }
             if(index <0 ) return@updateData list
@@ -43,6 +43,10 @@ internal class CartReposImpl @Inject constructor(
                 this.removeAt(index)
             }
         }
+    }
+
+    override suspend fun clearCatalogEntry() {
+        dataStore.updateData { listOf() }
     }
 
 }

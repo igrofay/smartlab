@@ -15,7 +15,6 @@ import com.example.smartlab.analyzes.model.AnalyzesState
 import com.example.smartlab.common.view_model.EventBase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,7 +38,7 @@ internal class AnalyzesVM @Inject constructor(
             }
         }
         launch {
-            cartRepos.getCart().collect{ list->
+            cartRepos.getCartCatalog().collect{ list->
                 val setId = list.map { ratio -> ratio.product.id }.toSet()
                 _state.value = (_state.value as AnalyzesState.Success).copy(
                     setIdCatalogEntry = setId
@@ -110,13 +109,13 @@ internal class AnalyzesVM @Inject constructor(
             }
             is AnalyzesEvent.Add -> {
                 viewModelScope.launch {
-                    cartRepos.add(
+                    cartRepos.addCatalogEntry(
                         Ratio(event.catalogEntry)
                     )
                 }
             }
             is AnalyzesEvent.Remove -> viewModelScope.launch {
-                cartRepos.remove(
+                cartRepos.removeCatalogEntry(
                     event.catalogEntry
                 )
             }

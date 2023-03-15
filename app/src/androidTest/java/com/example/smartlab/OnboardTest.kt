@@ -43,20 +43,17 @@ internal class OnboardTest {
         val appRepos =object : AppRepos{
             override val isUserFamiliarWithApp: Boolean
                 get() = false
-            override fun userHasBeenIntroducedWithApp() {
-
-            }
+            override fun userHasBeenIntroducedWithApp() {}
             override val token: String?
                 get() = null
-
             override fun setToken(token: String) {
             }
             override val isCodeSetForEnterApp: Boolean
                 get() = false
-
             override fun checkEnteredCode(code: String): Boolean {
                 return false
             }
+            override fun setNewCode(code: String) {}
         }
         viewModel = OnboardVM(appRepos)
     }

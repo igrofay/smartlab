@@ -8,7 +8,7 @@ import javax.inject.Inject
 class CalculateSumUseCase @Inject constructor(
     private val cartRepos: CartRepos,
 ) {
-    fun execute() : Flow<Int> = cartRepos.getCart().map { list->
+    fun execute() : Flow<Int> = cartRepos.getCartCatalog().map { list->
         list.sumOf {ratio ->
             ratio.amount * (ratio.product.price.toIntOrNull() ?: 0)
         }

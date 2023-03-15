@@ -12,12 +12,13 @@ import com.example.smartlab.analyzes.view_model.AnalyzesVM
 
 @Composable
 internal fun AnalyzesScreen(
+    goToCart: ()-> Unit,
     viewModel: AnalyzesVM = hiltViewModel()
 ) {
     when(val state = viewModel.state.value){
         AnalyzesState.Load -> Box(Modifier.fillMaxSize(), Alignment.Center){
             CircularProgressIndicator()
         }
-        is AnalyzesState.Success -> ContentView(state, viewModel)
+        is AnalyzesState.Success -> ContentView(state, viewModel, goToCart)
     }
 }

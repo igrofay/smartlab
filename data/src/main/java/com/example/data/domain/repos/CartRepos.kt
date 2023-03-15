@@ -5,8 +5,9 @@ import com.example.data.domain.model.catalog.Ratio
 import kotlinx.coroutines.flow.Flow
 
 interface CartRepos {
-    fun getCart(): Flow<List<Ratio<CatalogEntryModel>>>
-    suspend fun add(ratio: Ratio<CatalogEntryModel>)
-    suspend fun update(ratio: Ratio<CatalogEntryModel>)
-    suspend fun remove(entryModel: CatalogEntryModel)
+    fun getCartCatalog(): Flow<List<Ratio<CatalogEntryModel>>>
+    suspend fun addCatalogEntry(ratio: Ratio<CatalogEntryModel>)
+    suspend fun updateCatalogEntry(ratio: Ratio<CatalogEntryModel>)
+    suspend fun removeCatalogEntry(entryModel: CatalogEntryModel)
+    suspend fun clearCatalogEntry()
 }
